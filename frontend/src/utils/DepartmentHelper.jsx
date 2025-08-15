@@ -1,61 +1,35 @@
-import { useNavigate } from "react-router-dom"
 import axios from "axios";
-
-
-export const columns = [
-    {
-name: "S No",
-selector: (row) => row.sno
-    },
-    {
-name: "Department Name",
-selector: (row) => row.dep_name,
-sortable:true
-    },
-    {
-name: "Action",
-selector: (row) => row.action
-    },
-]
-
-
-export const DepartmentButtons = ({Id,onDepartmentDelete}) =>{
-    const navigate = useNavigate();
-
-    const handleDelete = async (id) =>{
-        const confirm = window.confirm("Do you Want to delete")
-        if(confirm){
-try {
-  const response = await axios.delete(`import axios from 'axios';
-import React from 'react'
-
+import { useNavigate } from "react-router-dom";
+// import { useAuth } from "../context/authContext";
 
 export const columns = [
   {
     name: "S No",
     selector: (row) => row.sno,
-        sortable: true,
-    width: "130px"
+    width: "100px"
   },
   {
     name: "Name",
     selector: (row) => row.name,
     sortable: true,
-    width : "270px"
+    width : "250px"
   },
   {
-    name: "Emp Id",
-    selector: (row) => row.employeeId,
-    sortable: true,
-    width : "150px"
+    name: "Image",
+    selector: (row) => row.profileImage,
+    width: "150px"
   },
-
   {
     name: "Department",
-    selector: (row) => row.department,
+    selector: (row) => row.dep_name,
     width: "190px"
   },
-
+  {
+    name: "DOB",
+    selector: (row) => row.dob,
+    sortable: true,
+    width: "190px"
+  },
   {
     name: "Action",
     selector: (row) => row.action,
@@ -64,74 +38,79 @@ export const columns = [
 ];
 
 
- export const AttendanceHelper = ({ status, employeeId,statusChange}) => {
-    const markEmployee = async (status, employeeId) =>{
-  const response = await axios.put(`https://attendance-management-system-backend-qzzf.onrender.com/api/attendance/update/${employeeId}`, {status}, {
-    headers: {
+export const fetchDepartments = async () => {
+  let departments
+  try {
+    const response = await axios.get('https://attendance-management-system-backend-qzzf.onrender.com//api/department', {
+      headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
-    },
-
-  })
-
-  if(response.data.success){
-    statusChange();
-  }
-
+      },
+    });
+    if (response.data.success) {
+      departments = response.data.departments
     }
+  } catch (error) {
+    if (error.response && !error.response.data.success) {
+      alert(error.response.data.error);
+    }
+  }
+  return departments
+};
+
+
+// employees for salary form
+export const getEmployees = async (id) => {
+  let employees;
+  try {
+    const response = await axios.get(`https://attendance-management-system-backend-qzzf.onrender.com//api/employee/department/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+    });
+    if (response.data.success) {
+      employees = response.data.employees
+    }
+  } catch (error) {
+    if (error.response && !error.response.data.success) {
+      alert(error.response.data.error);
+    }
+  }
+  return employees
+};
+
+
+
+
+export const EmployeeButtons = ({ Id }) => {
+  const navigate = useNavigate()
+  // const {user} = useAuth();
+
+
   return (
-    <div>
-     {status ==null ? (
-     <div className='flex space-x-8'>
-        <button className='px-4 py-2 bg-green-500 text-white'
-        onClick={() => markEmployee("present",employeeId)}
-        >Present
-        </button>
+    <div className="flex space-x-3">
+      <button className="px-3 py-1 bg-teal-600 text-white"
+        onClick={() => { navigate(`/admin-dashboard/employees/${Id}`) }}
+      >
+        View
+      </button>
+      <button className="px-3 py-1 bg-blue-600 text-white"
+            onClick={() => navigate(`/admin-dashboard/employees/edit/${Id}`)}
+      >
+        Edit
+      </button>
+      <button 
+      className="px-3 py-1 bg-yellow-600 text-white"
+      onClick= {()=>navigate(`/admin-dashboard/employees/salary/${Id}`)}
+        >Salary
+      </button>
+      <button className="px-3 py-1 bg-red-600 text-white"
+          onClick= {()=>navigate(`/admin-dashboard/employees/leaves/${Id}`)}
+      >
+        Leave
+      </button>
 
-        <button className='px-4 py-2 bg-red-500 text-white'
-        onClick={() => markEmployee("Absent",employeeId)}
-        >Absent
-        </button>
-
-        <button className='px-4 py-2 bg-amber-500 text-white'
-        onClick={() => markEmployee("Sick",employeeId)}
-        >Sick
-        </button>
 
 
-        <button className='px-4 py-2 bg-blue-500 text-white'
-        onClick={() => markEmployee("Leave",employeeId)}
-        >Leave
-        </button>
-        </div>
-      )  : (<p className='bg-gray-100 w-20 text-center py-2 rounded'>{status}</p>
-        )}
     </div>
   )
-}
-/api/department/${id}`,{
-    headers:{
-      "Authorization": `Bearer ${localStorage.getItem('token')}`
-    }
-  })
-  if(response.data.success){
-onDepartmentDelete()
-  }
-} catch (error) {
-  if(error.response && !error.response.data.success){
-    alert(error.response.data.error)
-  }
-} 
-        }
-    };
-
-
-    return (
-        <div className="flex space-x-3">
-        <button className="px-3 py-1 bg-teal-600 text-white"
-        onClick={()=>{navigate(`/admin-dashboard/department/${Id}`)}}
-        >Edit</button>
-        <button className="px-3 py-1 bg-red-600 text-white"
-        onClick={()=>handleDelete(Id)}>Delete</button>
-        </div>
-    )
 }
