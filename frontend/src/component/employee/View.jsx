@@ -38,7 +38,7 @@ const [employee, setEmployee] = useState(null)
         {/* Left Side - Profile Image */}
         <div className="flex justify-center md:justify-start">
           <img
-            src={`http://localhost:5000/${employee.userId.profileImage}`}
+            src={`https://attendance-management-system-backend-qzzf.onrender.com/${employee.userId.profileImage}`}
             alt="Profile"
             className="w-72 h-72 object-cover rounded-full border-4 border-gray-300 shadow-md"
           />
