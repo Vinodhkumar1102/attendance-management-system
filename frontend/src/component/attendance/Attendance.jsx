@@ -18,7 +18,7 @@ const statusChange = () =>{
   const fetchAttendance = async () => {
       setLoading(true)
       try {
-        const response = await axios.get('http://localhost:5000/api/attendance', {
+        const response = await axios.get('https://attendance-management-system-backend-qzzf.onrender.com/api/attendance', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           },
