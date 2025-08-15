@@ -15,7 +15,7 @@ const AttendanceReport = () => {
       if (dateFilter) {
         query.append("date", dateFilter);
       }
-      const response = await axios.get(`http://localhost:5000/api/attendance/report?${query.toString()}`, {
+      const response = await axios.get(`https://attendance-management-system-backend-qzzf.onrender.com/api/attendance/report?${query.toString()}`, {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem('token')}`
         },
