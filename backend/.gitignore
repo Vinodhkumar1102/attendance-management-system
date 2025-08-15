@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment secrets
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# IDE/Editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug/coverage
+*.pid
+*.seed
+coverage/
+.nyc_output/
+
+# Build folders
+dist/
+build/
