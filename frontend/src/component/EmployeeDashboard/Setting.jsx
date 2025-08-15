@@ -26,7 +26,7 @@ const handleSubmit = async (e) =>{
     } else {
         try{
             const response = await axios.put(
-                "http://localhost:5000/api/setting/change-password",
+                "https://attendance-management-system-backend-qzzf.onrender.com/api/setting/change-password",
                 setting,
                 {
                    headers : {
