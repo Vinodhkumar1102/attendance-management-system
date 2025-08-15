@@ -12,7 +12,7 @@ useEffect(()=>{
   const fetchDepartments = async () => {
     setDepLoading(true)
 try {
-  const response = await axios.get(`https://attendance-management-system-backend-qzzf.onrender.com/api/department/${id}`,{
+  const response = await axios.get(`http://localhost:5000/api/department/${id}`,{
     headers:{
       "Authorization": `Bearer ${localStorage.getItem('token')}`
     }
@@ -40,7 +40,7 @@ setDepartment(response.data.department)
        e.preventDefault();
        try {
         const response = await axios.put(
-            `https://attendance-management-system-backend-qzzf.onrender.com/api/department/${id}`,
+            `http://localhost:5000/api/department/${id}`,
             department,
             {
                 headers:{
