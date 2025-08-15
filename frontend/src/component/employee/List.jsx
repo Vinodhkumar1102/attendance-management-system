@@ -14,7 +14,7 @@ const [filteredEmployee, setFilteredEmployees] = useState([])
     const fetchEmployees = async () => {
       setEmpLoading(true)
       try {
-        const response = await axios.get('http://localhost:5000/api/employee', {
+        const response = await axios.get('https://attendance-management-system-backend-qzzf.onrender.com/api/employee', {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`
           }
@@ -29,7 +29,7 @@ const [filteredEmployee, setFilteredEmployees] = useState([])
               dep_name: emp.department.dep_name,
               name: emp.userId.name,
               dob: new Date(emp.dob).toLocaleDateString(),
-              profileImage: <img width={40} className='rounded-full' src={`http://localhost:5000/${emp.userId.profileImage}`} />,
+              profileImage: <img width={40} className='rounded-full' src={`https://attendance-management-system-backend-qzzf.onrender.com/${emp.userId.profileImage}`} />,
               action: (<EmployeeButtons Id={emp._id}/>),
             }
           ))
