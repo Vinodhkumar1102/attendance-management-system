@@ -21,7 +21,7 @@ const Add = () => {
     e.preventDefault();
 
   try {
-    const response = await axios.post(`http://localhost:5000/api/leave/add`, 
+    const response = await axios.post(`https://attendance-management-system-backend-qzzf.onrender.com/api/leave/add`, 
         leave,
          {
       headers: {
