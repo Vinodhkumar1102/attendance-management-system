@@ -11,7 +11,7 @@ const navigate = useNavigate();
     useEffect(() => {
         const fetchLeave = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/leave/detail/${id}`, {
+                const response = await axios.get(`https://attendance-management-system-backend-qzzf.onrender.com/api/leave/detail/${id}`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
                     }
@@ -31,7 +31,7 @@ const navigate = useNavigate();
   
       const changeStatus = async (id,status) => {
             try {
-                const response = await axios.put(`http://localhost:5000/api/leave/${id}`,
+                const response = await axios.put(`https://attendance-management-system-backend-qzzf.onrender.com/api/leave/${id}`,
                    { status }, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
@@ -59,7 +59,7 @@ const navigate = useNavigate();
         {/* Left Side - Profile Image */}
         <div className="flex justify-center md:justify-start">
           <img
-            src={`http://localhost:5000/${leave.employeeId.userId.profileImage}`}
+            src={`https://attendance-management-system-backend-qzzf.onrender.com/${leave.employeeId.userId.profileImage}`}
             alt="Profile"
             className="w-72 h-72 object-cover rounded-full border-4 border-gray-300 shadow-md"
           />
