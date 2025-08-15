@@ -16,7 +16,7 @@ const AttendanceHistory = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:5000/api/attendance/monthly-summary",
+        "https://attendance-management-system-backend-qzzf.onrender.com/api/attendance/monthly-summary",
         {
           params: { employeeId, month, year },
           headers: { Authorization: `Bearer ${token}` },
